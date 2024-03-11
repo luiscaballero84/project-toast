@@ -1,7 +1,7 @@
 import React from "react";
 
 import Button from "../Button";
-
+import Toast from "../Toast";
 import styles from "./ToastPlayground.module.css";
 
 const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
@@ -9,6 +9,11 @@ const VARIANT_OPTIONS = ["notice", "warning", "success", "error"];
 function ToastPlayground() {
   const [message, setMessage] = React.useState("");
   const [variant, setVariant] = React.useState("");
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -16,16 +21,17 @@ function ToastPlayground() {
         <img alt="Cute toast mascot" src="/toast.png" />
         <h1>Toast Playground</h1>
       </header>
+      <Toast variant={variant} isOpen={isOpen} handleClose={handleClose}>
+        {message}
+      </Toast>
 
       <form
         className={styles.controlsWrapper}
         onSubmit={(event) => {
           event.preventDefault();
-          window.alert(`message sent: ${message}, option: ${variant}`);
-          console.log("message:", message);
-          console.log("selected:", variant);
-          setMessage("");
-          setVariant("");
+          setIsOpen(true);
+          // setMessage("");
+          // setVariant("");
         }}
       >
         <div className={styles.row}>
