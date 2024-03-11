@@ -21,7 +21,7 @@ function ToastPlayground() {
         className={styles.controlsWrapper}
         onSubmit={(event) => {
           event.preventDefault();
-          window.alert("message sent:", message, variant);
+          window.alert(`message sent: ${message}, option: ${variant}`);
           console.log("message:", message);
           console.log("selected:", variant);
           setMessage("");
@@ -44,7 +44,6 @@ function ToastPlayground() {
               value={message}
               onChange={(event) => {
                 setMessage(event.target.value);
-                console.log("message", message);
               }}
             />
           </div>
@@ -53,22 +52,24 @@ function ToastPlayground() {
         <div className={styles.row}>
           <div className={styles.label}>Variant</div>
           <div className={`${styles.inputWrapper} ${styles.radioWrapper}`}>
-            {VARIANT_OPTIONS.map((option) => (
-              <label htmlFor={`variant-${option}`}>
-                <input
-                  type="radio"
-                  name="variant"
-                  key={`id-${option}`}
-                  id={`variant-${option}`}
-                  value={option}
-                  checked={option === variant}
-                  onChange={(event) => {
-                    setVariant(event.target.value);
-                  }}
-                />
-                {option}
-              </label>
-            ))}
+            {VARIANT_OPTIONS.map((option) => {
+              const id = `variant-${option}`;
+              return (
+                <label key={id} htmlFor={id}>
+                  <input
+                    type="radio"
+                    name="variant"
+                    id={id}
+                    value={option}
+                    checked={option === variant}
+                    onChange={(event) => {
+                      setVariant(event.target.value);
+                    }}
+                  />
+                  {option}
+                </label>
+              );
+            })}
 
             {/* TODO Other Variant radio buttons here */}
           </div>
