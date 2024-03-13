@@ -29,7 +29,7 @@ function Toast({ id, variant, children }) {
     <div className={`${styles.toast} ${styles[variant]}`}>
       <div className={styles.iconContainer}>{Icon && <Icon size={24} />}</div>
       <p className={styles.content}>
-        <div class="VisuallyHidden_wrapper">{variant} -</div>
+        <VisuallyHidden>{variant} -</VisuallyHidden>
         {children}
       </p>
 
